@@ -45,7 +45,7 @@ function creatSectionsArea() {
     let navBarArea = document.querySelector('#navbar__list')
     for (i = 0; i < numberOfSections; i++) {
         let sectionStructure =
-            `<section id="section${i+1}" data-nav="Section ${i+1}" class="your-active-class">
+            `<section id="section${i+1}" data-nav="Section ${i+1}" class="">
                  <div class="landing__container">
                      <h2>Section ${i+1}</h2>
                      <p></p>
@@ -58,7 +58,7 @@ function creatSectionsArea() {
 }
 
 function fillSectionParagraphs() {
-    let sectionsData = document.querySelectorAll('.landing__container p');
+    let sectionsData = document.querySelectorAll('section p');
     console.log("fillSectionParagraphs called")
     for (let sectionData of sectionsData) {
         sectionData.innerHTML = dummyParagraph;
@@ -71,9 +71,30 @@ function addingEventListenters() {
         clickableItems[i].addEventListener("click", function() {
             var element_to_scroll_to = document.getElementById(`section${i+1}`);
             element_to_scroll_to.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            getInviewElement();
         });
     }
+
+    window.addEventListener('scroll', function(event) {
+        let sections = document.querySelectorAll('section');
+        for (let section of sections) {
+            if (sectionInView(section)) {
+                section.classList.add("your-active-class")
+            } else {
+                section.classList.remove("your-active-class")
+            }
+        }
+    });
 }
+
+function sectionInView(elem) {
+    var bounderies = elem.getBoundingClientRect();
+    return (
+        (bounderies.top >= 0) && (bounderies.left >= 0) &&
+        (bounderies.bottom <= (window.innerHeight || document.documentElement.clientHeight)) &&
+        (bounderies.right <= (window.innerWidth || document.documentElement.clientWidth))
+    );
+};
 /**
  * End Helper Functions
  * Begin Main Functions

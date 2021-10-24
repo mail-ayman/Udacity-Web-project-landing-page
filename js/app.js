@@ -88,7 +88,7 @@ function addingEventListenters() {
 }
 
 function sectionInView(elem) {
-    var bounderies = elem.getBoundingClientRect();
+    let bounderies = elem.getBoundingClientRect();
     return (
         (bounderies.top >= 0) && (bounderies.left >= 0) &&
         (bounderies.bottom <= (window.innerHeight || document.documentElement.clientHeight)) &&

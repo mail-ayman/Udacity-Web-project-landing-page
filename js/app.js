@@ -42,7 +42,8 @@ function creatSectionsArea() {
     let i = 0;
 
     let sectionsarea = document.querySelector('.sectionsArea');
-    let navBarArea = document.querySelector('#navbar__list')
+    let navBarArea = document.querySelector('#navbar__list');
+    let sideBarArea = document.querySelector('#sideBarId');
     for (i = 0; i < numberOfSections; i++) {
         let sectionStructure =
             `<section id="section${i+1}" data-nav="Section ${i+1}" class="">
@@ -52,8 +53,10 @@ function creatSectionsArea() {
                  </div>
              </section>`
         let navItem = `<li class='navBarItemsClass black'><a>Section ${i+1}</a></li>`
+        let sideItem = `<li class='sideBarItemsClass black'><a>Section ${i+1}</a></li>`
         sectionsarea.innerHTML += sectionStructure;
         navBarArea.innerHTML += navItem;
+        sideBarArea.innerHTML += sideItem;
     }
 }
 
@@ -66,12 +69,12 @@ function fillSectionParagraphs() {
 }
 
 function addingEventListenters() {
+    // Scroll to anchor ID using scrollTO event
     const clickableItems = document.querySelectorAll(".navBarItemsClass");
     for (let i = 0; i < clickableItems.length; i++) {
         clickableItems[i].addEventListener("click", function() {
             var element_to_scroll_to = document.getElementById(`section${i+1}`);
             element_to_scroll_to.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            getInviewElement();
         });
     }
 
@@ -85,16 +88,14 @@ function addingEventListenters() {
             }
         }
     });
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+        console.log("sidenav intit")
+    });
 }
 
-function sectionInView(elem) {
-    let bounderies = elem.getBoundingClientRect();
-    return (
-        (bounderies.top >= 0) && (bounderies.left >= 0) &&
-        (bounderies.bottom <= (window.innerHeight || document.documentElement.clientHeight)) &&
-        (bounderies.right <= (window.innerWidth || document.documentElement.clientWidth))
-    );
-};
+
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -104,8 +105,6 @@ function mainFunction() {
     creatSectionsArea();
     fillSectionParagraphs();
     addingEventListenters();
-
-
 }
 
 // build the nav
@@ -113,8 +112,15 @@ function mainFunction() {
 
 // Add class 'active' to section when near top of viewport
 
+function sectionInView(elem) {
+    let bounderies = elem.getBoundingClientRect();
+    return (
+        (bounderies.top >= 0) && (bounderies.left >= 0) &&
+        (bounderies.bottom <= (window.innerHeight || document.documentElement.clientHeight)) &&
+        (bounderies.right <= (window.innerWidth || document.documentElement.clientWidth))
+    );
+};
 
-// Scroll to anchor ID using scrollTO event
 
 
 /**

@@ -73,7 +73,7 @@ function addingEventListenters() {
     const clickableItems = document.querySelectorAll(".menu__link");
     for (let i = 0; i < clickableItems.length; i++) {
         clickableItems[i].addEventListener("click", function() {
-            var element_to_scroll_to = document.getElementById(`section${i+1}`);
+            let element_to_scroll_to = document.getElementById(`section${i+1}`);
             element_to_scroll_to.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     }

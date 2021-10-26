@@ -43,7 +43,7 @@ function creatSectionsArea() {
 
     let sectionsarea = document.querySelector('.sectionsArea');
     let navBarArea = document.querySelector('#navbar__list');
-    let sideBarArea = document.querySelector('#sideBarId');
+    //let sideBarArea = document.querySelector('#sideBarId');
     for (i = 0; i < numberOfSections; i++) {
         let sectionStructure =
             `<section id="section${i+1}" data-nav="Section ${i+1}" class="">
@@ -52,11 +52,11 @@ function creatSectionsArea() {
                      <p></p>
                  </div>
              </section>`
-        let navItem = `<li class='navBarItemsClass black'><a>Section ${i+1}</a></li>`
-        let sideItem = `<li class='sideBarItemsClass black'><a>Section ${i+1}</a></li>`
+        let navItem = `<li class='menu__link'><a>Section ${i+1}</a></li>`
+            //let sideItem = `<li class='sideBarItemsClass black'><a>Section ${i+1}</a></li>`
         sectionsarea.innerHTML += sectionStructure;
         navBarArea.innerHTML += navItem;
-        sideBarArea.innerHTML += sideItem;
+        //sideBarArea.innerHTML += sideItem;
     }
 }
 
@@ -70,7 +70,7 @@ function fillSectionParagraphs() {
 
 function addingEventListenters() {
     // Scroll to anchor ID using scrollTO event
-    const clickableItems = document.querySelectorAll(".navBarItemsClass");
+    const clickableItems = document.querySelectorAll(".menu__link");
     for (let i = 0; i < clickableItems.length; i++) {
         clickableItems[i].addEventListener("click", function() {
             var element_to_scroll_to = document.getElementById(`section${i+1}`);
@@ -87,11 +87,6 @@ function addingEventListenters() {
                 section.classList.remove("your-active-class")
             }
         }
-    });
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.sidenav');
-        var instances = M.Sidenav.init(elems);
-        console.log("sidenav intit")
     });
 }
 
